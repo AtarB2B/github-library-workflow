@@ -15,6 +15,7 @@ runs:
       
     - name: Update Library
       run: |
+        chown -R $(id -u):$(id -g) $PWD
         echo "${{ inputs.SSH_PRIV_KEY_LIBRARY }}" > ssh-rsa.key
         chmod 400 ssh-rsa.key
         mkdir /root/.ssh && touch /root/.ssh/known_hosts
