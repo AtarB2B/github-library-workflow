@@ -2,6 +2,11 @@ name: Update Library Action
 
 description: Update Library
 
+inputs:
+  SSH_PRIV_KEY_LIBRARY:
+    required: true
+    description: SSH_PRIV_KEY_LIBRARY
+
 runs:
   using: "composite"
   steps:
@@ -10,7 +15,7 @@ runs:
       
     - name: Update Library
       run: |
-        echo "${{secrets.SSH_PRIV_KEY_LIBRARY}}" > ssh-rsa.key
+        echo "${{ inputs.SSH_PRIV_KEY_LIBRARY }}" > ssh-rsa.key
         chmod 400 ssh-rsa.key
         mkdir ~/.ssh && touch ~/.ssh/known_hosts
         eval $(ssh-agent) && ssh-add ssh-rsa.key
