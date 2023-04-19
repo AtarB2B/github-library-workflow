@@ -15,7 +15,7 @@ runs:
       
     - name: Update Library
       run: |
-        echo "${{secrets.SSH_PRIV_KEY_LIBRARY}}" > ssh-rsa.key
+        echo "${{ inputs.SSH_PRIV_KEY_LIBRARY }}" > ssh-rsa.key
         chmod 400 ssh-rsa.key
         mkdir /root/.ssh && touch /root/.ssh/known_hosts
         eval $(ssh-agent) && ssh-add ssh-rsa.key
