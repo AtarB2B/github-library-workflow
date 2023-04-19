@@ -15,11 +15,11 @@ runs:
       
     - name: Update Library
       run: |
-        echo "${{ inputs.SSH_PRIV_KEY_LIBRARY }}" > ssh-rsa.key
+        echo "${{secrets.SSH_PRIV_KEY_LIBRARY}}" > ssh-rsa.key
         chmod 400 ssh-rsa.key
-        mkdir ~/.ssh && touch ~/.ssh/known_hosts
+        mkdir /root/.ssh && touch /root/.ssh/known_hosts
         eval $(ssh-agent) && ssh-add ssh-rsa.key
-        ssh-keyscan -H github.com >> ~/.ssh/known_hosts
+        ssh-keyscan -H github.com >> /root/.ssh/known_hosts
         chmod +x ./update_library.sh && ./update_library.sh -b main
         cat ./library/requirements.txt >> requirements.txt
       shell: bash
