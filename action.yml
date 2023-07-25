@@ -2,10 +2,10 @@ name: Update Library Action
 
 description: Update Library
 
-inputs:
-  SSH_PRIV_KEY_LIBRARY:
-    required: true
-    description: SSH_PRIV_KEY_LIBRARY
+# inputs:
+#   SSH_PRIV_KEY_LIBRARY:
+#     required: true
+#     description: SSH_PRIV_KEY_LIBRARY
 
 runs:
   using: "composite"
@@ -13,13 +13,19 @@ runs:
     - name: Checkout
       uses: actions/checkout@v3
       
-    - name: Update Library
-      run: |
-        echo "${{ inputs.SSH_PRIV_KEY_LIBRARY }}" > ssh-rsa.key
-        chmod 400 ssh-rsa.key
-        mkdir ~/.ssh && touch ~/.ssh/known_hosts
-        eval $(ssh-agent) && ssh-add ssh-rsa.key
-        ssh-keyscan -H github.com >> ~/.ssh/known_hosts
-        chmod +x ./update_library.sh && ./update_library.sh -b main
-        cat ./library/requirements.txt >> requirements.txt
-      shell: bash
+    # - name: Update Library
+    #   run: |
+    #     echo "${{ inputs.SSH_PRIV_KEY_LIBRARY }}" > ssh-rsa.key
+    #     chmod 400 ssh-rsa.key
+    #     mkdir ~/.ssh && touch ~/.ssh/known_hosts
+    #     eval $(ssh-agent) && ssh-add ssh-rsa.key
+    #     ssh-keyscan -H github.com >> ~/.ssh/known_hosts
+    #     chmod +x ./update_library.sh && ./update_library.sh -b main
+    #     cat ./library/requirements.txt >> requirements.txt
+    #   shell: bash
+
+   - name: Update Library
+     run: |
+        python -m pip install --upgrade pip ; pip3 install pylint pytest faker coverage pytest-cov keyring keyrings.google-artifactregistry-auth
+        if [ -f requirements.txt ]; then pip3 install -r requirements.txt; fi
+    shell: bash
