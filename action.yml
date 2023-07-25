@@ -2,6 +2,9 @@ name: Update Library Action
 
 description: Update Library
 
+env:
+  ARTIFACT_CREDENTIALS: ${{secrets.ATARB2B_API_CREDENTIALS_PROD}}
+
 # inputs:
 #   SSH_PRIV_KEY_LIBRARY:
 #     required: true
@@ -25,6 +28,7 @@ runs:
     #   shell: bash
     - name: Update Library
       run: |
+        echo $ARTIFACT_CREDENTIALS|gcloud auth activate-service-account --key-file=-
         python -m pip install --upgrade pip ; pip3 install pylint pytest faker coverage pytest-cov keyring keyrings.google-artifactregistry-auth
         if [ -f requirements.txt ]; then pip3 install -r requirements.txt; fi
       shell: bash
