@@ -2,13 +2,13 @@ name: Update Library Action
 
 description: Update Library
 
-env:
-  ARTIFACT_CREDENTIALS: ${{secrets.ATARB2B_API_CREDENTIALS_PROD}}
-
-# inputs:
-#   SSH_PRIV_KEY_LIBRARY:
-#     required: true
-#     description: SSH_PRIV_KEY_LIBRARY
+inputs:
+  # SSH_PRIV_KEY_LIBRARY:
+  #   required: true
+  #   description: SSH_PRIV_KEY_LIBRARY
+  ARTIFACT_CREDENTIALS:
+    required: true
+    description: ARTIFACT_CREDENTIALS
 
 runs:
   using: "composite"
