@@ -23,9 +23,8 @@ runs:
     #     chmod +x ./update_library.sh && ./update_library.sh -b main
     #     cat ./library/requirements.txt >> requirements.txt
     #   shell: bash
-
-   - name: Update Library
-     run: |
+    - name: Update Library
+      run: |
         python -m pip install --upgrade pip ; pip3 install pylint pytest faker coverage pytest-cov keyring keyrings.google-artifactregistry-auth
         if [ -f requirements.txt ]; then pip3 install -r requirements.txt; fi
-    shell: bash
+      shell: bash
