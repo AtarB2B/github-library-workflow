@@ -2,30 +2,12 @@ name: Update Library Action
 
 description: Update Library
 
-# inputs:
-  # SSH_PRIV_KEY_LIBRARY:
-  #   required: true
-  #   description: SSH_PRIV_KEY_LIBRARY
-  # ARTIFACT_CREDENTIALS:
-  #   required: true
-  #   description: ARTIFACT_CREDENTIALS
-
 runs:
   using: "composite"
   steps:
     - name: Checkout
       uses: actions/checkout@v3
       
-    # - name: Update Library
-    #   run: |
-    #     echo "${{ inputs.SSH_PRIV_KEY_LIBRARY }}" > ssh-rsa.key
-    #     chmod 400 ssh-rsa.key
-    #     mkdir ~/.ssh && touch ~/.ssh/known_hosts
-    #     eval $(ssh-agent) && ssh-add ssh-rsa.key
-    #     ssh-keyscan -H github.com >> ~/.ssh/known_hosts
-    #     chmod +x ./update_library.sh && ./update_library.sh -b main
-    #     cat ./library/requirements.txt >> requirements.txt
-    #   shell: bash
     - name: Update Library
       run: |
         echo $ATARB2B_API_CREDENTIALS_PROD
